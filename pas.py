@@ -2,18 +2,17 @@ from django.db import models
 
 
 class User(models.Model):
-    email = models.CharField(max_length=255)
-    token = models.CharField(max_length=2, choices=POSITIONS, default=cashier)
+    email = models.EmailField()
+    token = models.CharField(max_length=60)
 
 
 class Breed(models.Model):
-    breed = models.CharField(max_length=255)
+    breed = models.CharField(max_length=80)
 
 
 class ListPets(models.Model):
-    color = models.DateTimeField(auto_now_add=True)
-    age = models.FloatField(default=0.0)
-    pickup = models.BooleanField(default=False)
-    description = models.BooleanField(default=False)
-    user = models.ForeignKey(Product, on_delete=models.CASCADE)
-    breed = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=80)
+    age = models.IntegerField(default=0)
+    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
